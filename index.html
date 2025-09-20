@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alameda Hacks - High School Hackathon</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&family=Courier+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-logo {
+            width: 140px;
+            height: auto;
+            margin-bottom: 2rem;
+            border-radius: 20px;
+            background: rgba(10, 10, 10, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 30px rgba(102, 126, 234, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.08) translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.6);
+            background: rgba(10, 10, 10, 0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 
+                        0 0 50px rgba(102, 126, 234, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.6));
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2, #00d4ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            position: relative;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .feature:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .feature:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+        }
+
+        .feature:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .feature:nth-child(4) .feature-icon {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+
+        /* Details Section */
+        #details {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            color: white;
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .info-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            filter: drop-shadow(0 0 20px currentColor);
+        }
+
+        .info-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Sponsors Section */
+        .sponsors {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            position: relative;
+        }
+
+        .sponsor-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sponsor-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .sponsor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .sponsor-card:hover::before {
+            left: 100%;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .sponsor-logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #667eea;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .sponsor-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sponsor-card:hover .sponsor-logo {
+            border-color: rgba(102, 126, 234, 0.6);
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.1);
+        }
+
+        .sponsor-content {
+            flex: 1;
+        }
+
+        .sponsor-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #667eea;
+        }
+
+        .sponsor-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Prizes Section */
+        .prizes {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 50%, #1a1a2e 100%);
+            color: white;
+            position: relative;
+        }
+
+        .prize-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .prize-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .prize-card:hover::before {
+            left: 100%;
+        }
+
+        .prize-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .prize-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .prize-header i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .prize-card.first-place .prize-header i {
+            color: #ffd700;
+            filter: drop-shadow(0 0 20px #ffd700);
+        }
+
+        .prize-card.second-place .prize-header i {
+            color: #c0c0c0;
+            filter: drop-shadow(0 0 20px #c0c0c0);
+        }
+
+        .prize-card.third-place .prize-header i {
+            color: #cd7f32;
+            filter: drop-shadow(0 0 20px #cd7f32);
+        }
+
+        .prize-card.participation .prize-header i {
+            color: #667eea;
+            filter: drop-shadow(0 0 20px #667eea);
+        }
+
+        .prize-header h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .prize-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .prize-details {
+            position: relative;
+            z-index: 2;
+        }
+
+        .prize-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .prize-item:last-child {
+            border-bottom: none;
+        }
+
+        .prize-name {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .prize-quantity {
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .redemption-note {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #667eea;
+        }
+
+        .redemption-note i {
+            margin-right: 0.5rem;
+        }
+
+        .prize-disclaimer {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .prize-disclaimer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Registration Section */
+        .registration {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            padding: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+            transform: scale(1.2) translateY(-5px);
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Hacker Rain Effect */
+        .hacker-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .rain-drop {
+            position: absolute;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff41;
+            animation: hackerRain linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes hackerRain {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px));
+                opacity: 0;
+            }
+        }
+
+        .rain-drop:nth-child(odd) {
+            color: #39ff14;
+            text-shadow: 0 0 8px #39ff14;
+        }
+
+        .rain-drop:nth-child(3n) {
+            color: #00ff00;
+            text-shadow: 0 0 12px #00ff00;
+        }
+
+        .rain-drop:nth-child(4n) {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Floating elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prize-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsor-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .sponsor-card a {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+
+            .sponsor-logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .social-links a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                padding: 12px;
+            }
+
+            .hero-content div[style*="background: rgba(102, 126, 234, 0.2)"] div[style*="font-size: 2.5rem"] {
+                font-size: 2rem !important;
+            }
+
+            .hero-content div[style*="background: rgba(102, 126, 234, 0.2)"] {
+                padding: 1rem !important;
+                margin: 1rem auto !important;
+            }
+
+            .prizes div[style*="font-size: 3rem"] {
+                font-size: 2.2rem !important;
+            }
+
+            .prizes div[style*="background: rgba(102, 126, 234, 0.15)"] {
+                padding: 1.5rem !important;
+                margin: 0 auto 2rem auto !important;
+            }
+
+            .sponsors div[style*="background: rgba(102, 126, 234, 0.15)"] {
+                padding: 1.5rem !important;
+                margin: 0 auto 2rem auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">&lt;AlamedaHacks/&gt;</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#prizes">Prizes</a></li>
+                <li><a href="#register">Register</a></li>
+                <li><a href="#sponsors">Sponsors</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hacker-rain" id="heroRain"></div>
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <img src="alamedahacks.png" alt="Alameda Hacks Logo" class="hero-logo floating">
+                <h1>AlamedaHacks</h1>
+                <p>The ultimate online hackathon for innovators worldwide</p>
+                <div style="background: rgba(102, 126, 234, 0.2); border: 2px solid rgba(102, 126, 234, 0.5); border-radius: 15px; padding: 1.5rem; margin: 2rem auto; max-width: 500px; text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #00ff41; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace;">
+                        $15,000+ in Prizes
+                    </div>
+                    <div style="font-size: 1rem; opacity: 0.9;">
+                        Amazing rewards await our winners!
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="https://alameda-hacks.devpost.com/" class="cta-button" target="_blank">
+                        Join Now <i class="fas fa-rocket"></i>
+                    </a>
+                    <a href="https://discord.gg/bZT2vKg7Ub" class="cta-button" target="_blank" style="background: linear-gradient(135deg, #5865F2, #404eed);">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="hacker-rain" id="aboutRain"></div>
+        <div class="container">
+            <h2 class="section-title">&gt; About_</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>AlamedaHacks brings together brilliant minds from across the globe for an epic coding marathon.</p>
+                    <p>Build the future. Learn from peers. Win amazing prizes.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <div>
+                            <h3>Global Community</h3>
+                            <p>Connect with hackers worldwide</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h3>Innovation</h3>
+                            <p>Build solutions that matter</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3>Epic Prizes</h3>
+                            <p>Compete for incredible rewards</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div>
+                            <h3>24/7 Support</h3>
+                            <p>Get help whenever you need it</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="hacker-rain" id="detailsRain"></div>
+        <div class="container">
+            <h2 class="section-title">&gt; Event_Details</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Date & Time</h3>
+                    <p>January 1-10, 2026</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>100% Online</h3>
+                    <p>Hack from anywhere<br>No limits, no boundaries</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>Amazing Prizes</h3>
+                    <p>Cash prizes & swag<br>Recognition for winners</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Team Size</h3>
+                    <p>1-4 members per team<br>Solo hackers welcome</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Everyone Can Join</h3>
+                    <p>Open to all skill levels<br>Beginners encouraged</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Any Tech Stack</h3>
+                    <p>Use your favorite tools<br>Learn new ones too</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prizes" class="prizes">
+        <div class="hacker-rain" id="prizesRain"></div>
+        <div class="container">
+            <h2 class="section-title">&gt; Prizes_&_Awards</h2>
+            <div style="background: rgba(102, 126, 234, 0.15); border: 2px solid rgba(102, 126, 234, 0.4); border-radius: 20px; padding: 2rem; margin: 0 auto 3rem auto; max-width: 600px; text-align: center;">
+                <div style="font-size: 3rem; font-weight: 700; color: #00ff41; margin-bottom: 0.5rem; font-family: 'JetBrains Mono', monospace;">
+                    $15,000+ Total Prize Pool
+                </div>
+                <div style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 1.5rem;">
+                    Amazing prizes await our winners! Check out what you could win.
+                </div>
+            </div>
+            
+            <div class="prize-grid">
+                <div class="prize-card first-place">
+                    <div class="prize-header">
+                        <i class="fas fa-trophy"></i>
+                        <h3>First Place</h3>
+                        <div class="prize-value">$6,159 Value</div>
+                    </div>
+                    <div class="prize-details">
+                        <div class="prize-item">
+                            <span class="prize-name">2-year VIP CodeCrafters membership</span>
+                            <span class="prize-quantity">4 units × $720</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Cleanshot X License</span>
+                            <span class="prize-quantity">1 unit × $29</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">$25 Art of Problem Solving Coupon</span>
+                            <span class="prize-quantity">4 units × $25</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">NordVPN 1 Year Plan</span>
+                            <span class="prize-quantity">6 units × $60</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Nord Pass 1 Year</span>
+                            <span class="prize-quantity">6 units × $25</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Nord Protect</span>
+                            <span class="prize-quantity">6 units × $65</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Incogni</span>
+                            <span class="prize-quantity">6 units × $100</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Nexos.Ai Credit</span>
+                            <span class="prize-quantity">6 units × $275</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prize-card second-place">
+                    <div class="prize-header">
+                        <i class="fas fa-medal"></i>
+                        <h3>Second Place</h3>
+                        <div class="prize-value">$1,470 Value</div>
+                    </div>
+                    <div class="prize-details">
+                        <div class="prize-item">
+                            <span class="prize-name">1-year VIP CodeCrafters membership</span>
+                            <span class="prize-quantity">4 units × $360</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Cleanshot X License</span>
+                            <span class="prize-quantity">1 unit × $29</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prize-card third-place">
+                    <div class="prize-header">
+                        <i class="fas fa-award"></i>
+                        <h3>Third Place</h3>
+                        <div class="prize-value">$750 Value</div>
+                    </div>
+                    <div class="prize-details">
+                        <div class="prize-item">
+                            <span class="prize-name">6-month VIP CodeCrafters membership</span>
+                            <span class="prize-quantity">4 units × $180</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Cleanshot X License</span>
+                            <span class="prize-quantity">1 unit × $29</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prize-card participation">
+                    <div class="prize-header">
+                        <i class="fas fa-gift"></i>
+                        <h3>Participation Prizes</h3>
+                        <div class="prize-value">$6,700 Value</div>
+                    </div>
+                    <div class="prize-details">
+                        <div class="prize-item">
+                            <span class="prize-name">.xyz domain free for 1 year</span>
+                            <span class="prize-quantity">100 units × $15</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">Interview Cake coding interview prep course for 7 days</span>
+                            <span class="prize-quantity">50 units × $50</span>
+                        </div>
+                        <div class="prize-item">
+                            <span class="prize-name">3 Month Unibee Access</span>
+                            <span class="prize-quantity">100 units × $27</span>
+                        </div>
+                    </div>
+                    <div class="redemption-note">
+                        <i class="fas fa-info-circle"></i>
+                        DM Admin on Discord to redeem
+                    </div>
+                </div>
+            </div>
+
+            <div class="prize-disclaimer">
+                <p><strong>Note:</strong> Winners will receive the awards themselves, not the cash equivalent. The listed cash value represents the monetary value of the prizes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sponsors" class="sponsors">
+        <div class="hacker-rain" id="sponsorsRain"></div>
+        <div class="container">
+            <h2 class="section-title">&gt; Our_Sponsors</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Thank you to our amazing sponsors who make AlamedaHacks possible
+            </p>
+            
+            <div class="sponsor-grid">
+                <div class="sponsor-card">
+                    <a href="https://codecrafters.io/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="codecrafters-logo.png" alt="CodeCrafters Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">CodeCrafters</div>
+                            <div class="sponsor-description">Empowering developers with hands-on coding challenges and interactive learning experiences</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://flatlogic.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="flatlogic-logo.png" alt="Flatlogic Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Flatlogic</div>
+                            <div class="sponsor-description">AI-powered web application generator that creates full-stack apps in minutes with complete customization</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://gen.xyz" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="xyz-logo-white.png" alt=".xyz Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">.xyz</div>
+                            <div class="sponsor-description">The next generation domain for the next generation internet - innovative and memorable web addresses</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://unibee.dev" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="UniBee Main Logo.jpg" alt="Unibee Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Unibee</div>
+                            <div class="sponsor-description">Empowering developers with innovative solutions and cutting-edge technology platforms</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://artofproblemsolving.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="AoPS_Main_Logo (1).png" alt="AoPS Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Art of Problem Solving</div>
+                            <div class="sponsor-description">Advanced mathematics education platform for students seeking to master problem-solving skills</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://www.interviewcake.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="cake_logo_blue_gray.png" alt="InterviewCake Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">InterviewCake</div>
+                            <div class="sponsor-description">Comprehensive coding interview preparation platform with step-by-step problem solutions</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://nordvpn.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="nordvpn.png" alt="NordVPN Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">NordVPN</div>
+                            <div class="sponsor-description">Leading VPN service providing secure, private, and fast internet access worldwide</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://incogni.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="Incogni_logo_white_better_quality.png" alt="Incogni Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Incogni</div>
+                            <div class="sponsor-description">Protect your privacy by removing personal data from data brokers and people search sites</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://nordpass.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="NordPass-white-horizontal (2).png" alt="NordPass Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">NordPass</div>
+                            <div class="sponsor-description">Secure password manager that helps you create, store, and manage your passwords safely</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://saily.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="saily-logo-white (3).png" alt="Saily Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Saily</div>
+                            <div class="sponsor-description">Innovative platform providing cutting-edge solutions for modern digital challenges</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://nordprotect.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="nordprotect.png" alt="NordProtect Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">NordProtect</div>
+                            <div class="sponsor-description">Comprehensive digital security solution protecting your devices and data from threats</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="sponsor-card">
+                    <a href="https://nexos.ai/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 2rem; width: 100%;">
+                        <div class="sponsor-logo">
+                            <img src="nexos-ai-logo.png" alt="Nexos.ai Logo">
+                        </div>
+                        <div class="sponsor-content">
+                            <div class="sponsor-name">Nexos.ai</div>
+                            <div class="sponsor-description">Advanced AI platform delivering intelligent solutions and cutting-edge artificial intelligence services</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="background: rgba(102, 126, 234, 0.15); border: 2px solid rgba(102, 126, 234, 0.4); border-radius: 20px; padding: 2rem; margin: 3rem auto 0 auto; max-width: 600px; text-align: center;">
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="font-size: 1.3rem; margin-bottom: 1rem; color: #667eea; font-weight: 600;">Want to sponsor us?</p>
+                    <p style="font-size: 1rem; opacity: 0.9; margin-bottom: 1.5rem;">Join our amazing lineup of sponsors and support the next generation of innovators!</p>
+                    <a href="mailto:alamedahacks@gmail.com" style="display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3); border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 20px 40px rgba(102, 126, 234, 0.4)'; this.style.borderColor='rgba(255, 255, 255, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(102, 126, 234, 0.3)'; this.style.borderColor='transparent'">
+                        <i class="fas fa-envelope"></i> Email alamedahacks@gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="registration">
+        <div class="hacker-rain" id="registerRain"></div>
+        <div class="container">
+            <h2 class="section-title">&gt; Ready_To_Hack?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9;">
+                Join the revolution. Build the impossible.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://alameda-hacks.devpost.com/" class="cta-button" target="_blank">
+                    <i class="fas fa-rocket"></i> Register Now
+                </a>
+                <a href="https://discord.gg/bZT2vKg7Ub" class="cta-button" target="_blank" style="background: linear-gradient(135deg, #5865F2, #404eed);">
+                    <i class="fab fa-discord"></i> Join Community
+                </a>
+                <a href="https://www.instagram.com/alamedahacks/" class="cta-button" target="_blank" style="background: linear-gradient(135deg, #E4405F, #c13584);">
+                    <i class="fab fa-instagram"></i> Follow
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="hacker-rain" id="footerRain"></div>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://discord.gg/bZT2vKg7Ub" target="_blank" title="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://www.instagram.com/alamedahacks/" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://alameda-hacks.devpost.com/" target="_blank" title="Devpost">
+                    <i class="fas fa-code"></i>
+                </a>
+                <a href="mailto:alamedahacks@gmail.com" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 AlamedaHacks. Built by hackers, for hackers.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">
+                <a href="mailto:alamedahacks@gmail.com" style="color: #667eea;">alamedahacks@gmail.com</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gradual header color change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollProgress = Math.min(window.scrollY / 300, 1);
+            
+            // Gradual transition from purple to dark blue
+            const startHue = 250; // purple
+            const endHue = 220;   // blue
+            const currentHue = startHue + (endHue - startHue) * scrollProgress;
+            
+            const startSat = 60;
+            const endSat = 80;
+            const currentSat = startSat + (endSat - startSat) * scrollProgress;
+            
+            const startLight = 65;
+            const endLight = 45;
+            const currentLight = startLight + (endLight - startLight) * scrollProgress;
+            
+            header.style.background = `linear-gradient(135deg, 
+                hsl(${currentHue}, ${currentSat}%, ${currentLight}%) 0%, 
+                hsl(${currentHue - 10}, ${currentSat}%, ${currentLight - 5}%) 100%)`;
+            
+            const shadowOpacity = 0.1 + (scrollProgress * 0.15);
+            header.style.boxShadow = `0 2px ${10 + scrollProgress * 15}px rgba(0,0,0,${shadowOpacity})`;
+        });
+
+        // Hacker Rain Effect
+        function createHackerRain(containerId, density = 20) {
+            const container = document.getElementById(containerId);
+            const symbols = ['0', '1', '{}', '[]', '<>', '//', '&&', '||', '++', '--', '==', '!=', '=>', '??', '$$', '##'];
+            
+            for (let i = 0; i < density; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Random horizontal position
+                drop.style.left = Math.random() * 100 + '%';
+                
+                // Random size
+                drop.style.fontSize = (Math.random() * 8 + 10) + 'px';
+                
+                // Random animation duration (8-15 seconds)
+                drop.style.animationDuration = (Math.random() * 7 + 8) + 's';
+                
+                // Random delay to stagger drops
+                drop.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(drop);
+            }
+        }
+
+        // Initialize hacker rain for all sections
+        document.addEventListener('DOMContentLoaded', () => {
+            createHackerRain('heroRain', 15);
+            createHackerRain('aboutRain', 12);
+            createHackerRain('detailsRain', 12);
+            createHackerRain('prizesRain', 10);
+            createHackerRain('sponsorsRain', 10);
+            createHackerRain('registerRain', 10);
+            createHackerRain('footerRain', 8);
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.info-card, .feature, .about-text, .sponsor-card, .prize-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        // Enhanced card hover effects
+        document.querySelectorAll('.info-card, .sponsor-card, .prize-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
